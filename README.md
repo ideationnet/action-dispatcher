@@ -15,9 +15,15 @@ The dispatcher will use the provided implementation of
 
 
 ```php
-'action.example' => factory([Action::class, 'create'])
-    ->parameter('input', get(ExampleInputHandler::class))
-    ->parameter('domain', get(YourDomainLogic::class))
-    ->parameter('responder', get(JsonResponseHandler::class)),
+'action.example' => object(Action::class)
+    ->method('domain', YourDomainClass::class),
+    
+'input.default' => get(YourDefaultInput::class),
+'responder.default' => get(YourDefaultResonder::class),]
+
+'another.action' => object(Action::class)
+    ->method('input', OverrideInputClass::class)
+    ->method('domain', AnotherDomain::class)
+    ->method('responder', CustomResponder::class),
 ```
 

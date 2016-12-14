@@ -5,7 +5,10 @@ namespace IdNet;
 
 class Action
 {
-    public static function create($domain) {
+    public static function create($domain,
+                                  $input = 'input.default',
+                                  $responder = 'responder.default'
+    ) {
         $action = new self;
         $action->setDomainHandler($domain);
         return $action;
@@ -17,6 +20,12 @@ class Action
 
     public function domain($domain) {
         $this->setDomainHandler($domain);
+    }
+    public function input($input) {
+        $this->setInputHandler($input);
+    }
+    public function responder($responder) {
+        $this->setResponseHandler($responder);
     }
 
     public function getInputHandler()
