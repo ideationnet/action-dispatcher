@@ -5,22 +5,19 @@ namespace IdNet;
 
 class Action
 {
-    public static function create(
-        $input,
-        $domain,
-        $responder
-    ) {
+    public static function create($domain) {
         $action = new self;
-        $action->setInputHandler($input);
         $action->setDomainHandler($domain);
-        $action->setResponseHandler($responder);
         return $action;
     }
 
-    protected $inputHandler;
+    protected $inputHandler = 'input.default';
     protected $domainHandler;
-    protected $responseHandler;
+    protected $responseHandler = 'responder.default';
 
+    public function domain($domain) {
+        $this->setDomainHandler($domain);
+    }
 
     public function getInputHandler()
     {
